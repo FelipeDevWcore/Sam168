@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     // Gerar token JWT
     const token = jwt.sign(
       { 
-        userId: user.codigo, 
+        userId: user.codigo,
         email: user.email,
         usuario: user.usuario,
         tipo: user.tipo,
@@ -161,7 +161,7 @@ router.get('/me', async (req, res) => {
           s.codigo_cliente,
           s.codigo_servidor
          FROM streamings s 
-         WHERE s.codigo_cliente = ?`,
+         WHERE s.codigo = ?`,
         [decoded.userId]
       );
     }
@@ -178,7 +178,7 @@ router.get('/me', async (req, res) => {
     }
     
     res.json({
-      id: user.codigo_cliente || user.codigo,
+      id: user.codigo,
       nome: user.nome,
       email: user.email,
       usuario: user.usuario,

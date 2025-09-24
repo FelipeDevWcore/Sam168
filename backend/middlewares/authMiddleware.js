@@ -51,7 +51,7 @@ const authMiddleware = async (req, res, next) => {
             s.codigo_cliente,
             s.codigo_servidor
            FROM streamings s 
-           WHERE s.codigo_cliente = ? AND s.status = 1 LIMIT 1`,
+           WHERE s.codigo = ? AND s.status = 1 LIMIT 1`,
           [decoded.userId]
         );
       }
@@ -70,7 +70,7 @@ const authMiddleware = async (req, res, next) => {
 
       const user = rows[0];
       req.user = {
-        id: user.codigo_cliente || user.codigo,
+        id: user.codigo,
         nome: user.nome,
         email: user.email,
         usuario: user.usuario || (user.email ? user.email.split('@')[0] : `user_${user.codigo}`),
